@@ -89,15 +89,18 @@ class Matrix:
         else:
             print("columns of the first matrix must be equal to the rows of the second matrix")
             return None
-m1 = Matrix(2, 3)
-m1.matrix=[[2, 3, 4],[5, 4, 2]]
-m2 = Matrix(3, 2)
-m2.matrix = [[9, 4], [3, 2], [5,6]]
 
+#testing 
 
+# m1 = Matrix(2, 3)
+# m1.matrix=[[2, 3, 4],[5, 4, 2]]
+# m2 = Matrix(3, 2)
+# m2.matrix = [[9, 4], [3, 2], [5,6]]
 #
-# m1.matrix = Matrix.matrix_multiplication(m1.matrix, m2.matrix)
-# m1 = m1.multiply(m2)
-print(m1.matrix)
-#print(m1.rows)
-# print(m1.cols)
+#
+# #
+# # m1.matrix = Matrix.matrix_multiplication(m1.matrix, m2.matrix)
+# # m1 = m1.multiply(m2)
+# print(m1.matrix)
+# #print(m1.rows)
+# # print(m1.cols)
