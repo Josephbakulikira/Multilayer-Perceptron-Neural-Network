@@ -1,9 +1,10 @@
 import random
 class Matrix:
-    def __init__(self, rows, cols):
+    def __init__(self, rows, cols, label=""):
         self.rows = rows
         self.cols = cols
         self.matrix = [[0 for i in range(cols)] for j in range(rows)]
+        self.label = label
         #or you can simply use numpy
         """
         # import numpy as np
@@ -30,10 +31,10 @@ class Matrix:
                 for y in range(self.cols):
                     self.matrix[x][y] *= value
 
-    def transpose(self):
-        result = Matrix(self.cols, self.rows)
-        for x in range(self.rows):
-            for y in range(self.cols):
+    def transpose(m):
+        result = Matrix(m.cols, m.rows)
+        for x in range(m.rows):
+            for y in range(m.cols):
                 result.matrix[y][x] = self.matrix[x][y]
         return result
 
@@ -47,6 +48,16 @@ class Matrix:
                 for y in range(self.cols):
                     self.matrix[x][y] += value
 
+    def subtract(self, value):
+        if type(value) is Matrix:
+            for x in range(self.rows):
+                for y in range(self.cols):
+                    self.matrix[x][y] -= value.matrix[x][y]
+        else:
+            for x in range(self.rows):
+                for y in range(self.cols):
+                    self.matrix[x][y] -= value
+
     def HadamartProduct(self, value):
         for x in range(self.rows):
             for y in range(self.cols):
@@ -57,6 +68,13 @@ class Matrix:
         for x in range(self.rows):
             for y in range(self.cols):
                 mat.matrix[x][y] = self.matrix[x][y] + _matrix.matrix[x][y]
+        return mat
+
+    def __sub__(self, _matrix):
+        mat = Matrix(self.rows, self.cols)
+        for x in range(self.rows):
+            for y in range(self.cols):
+                mat.matrix[x][y] = self.matrix[x][y] - _matrix.matrix[x][y]
         return mat
 
     def randomize(self):
@@ -70,6 +88,19 @@ class Matrix:
             for y in range(self.cols):
                 self.matrix[x][y] = fn(self.matrix[x][y])
 
+    def Debug(self):
+        if self.rows == 1:
+            if self.label != "":
+                print("{0} : {1}".format(self.label, self.toArray()))
+                print(self.label + " : " + self.toArray())
+            else:
+                print(self.toArray())
+        else:
+            if self.label != "":
+                print("{0} : {1}".format(self.label, self.matrix))
+            else:
+                print(self.matrix)
+
     def fromArray(arr):
         rows = len(arr)
         cols = 1
@@ -77,6 +108,14 @@ class Matrix:
         for i in range(rows):
             current.matrix[i][0] = arr[i]
         return current
+
+    def toArray(self):
+        arr = []
+        for x in range(self.rows):
+            for y in range(self.cols):
+                arr.append(self.matrix[x][y])
+
+        return arr
 
     def matrix_multiplication(a, b):
         columns_a = len(a.matrix[0])
@@ -100,15 +139,16 @@ class Matrix:
 
 #testing
 
-# m1 = Matrix(2, 3)
-# m1.matrix=[[2, 3, 4],[5, 4, 2]]
+# m1 = Matrix(3, 2)
+# m1.matrix=[[9, 4], [3, 2], [5,6]]
 # m2 = Matrix(3, 2)
 # m2.matrix = [[9, 4], [3, 2], [5,6]]
-# #
-# #
+#
 # # #
-# m1 = Matrix.matrix_multiplication(m1, m2)
-# # # m1 = m1.multiply(m2)
-# print(m1.matrix)
-# # #print(m1.rows)
-# # # print(m1.cols)
+# # #
+# # # #
+# # m1 = Matrix.matrix_multiplication(m1, m2)
+# # # # m1 = m1.multiply(m2)
+# print(m3.matrix)
+# # # #print(m1.rows)
+# # # # print(m1.cols)

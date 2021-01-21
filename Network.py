@@ -22,7 +22,7 @@ class NeuralNetwork:
 
 
 
-    def FeedForward(inputs):
+    def FeedForward(self, inputs):
         inputs = Matrix.fromArray(inputs)
 
         hidden = Matrix.matrix_multiplication(self.hiddenInputWeights, inputs)
@@ -33,4 +33,24 @@ class NeuralNetwork:
         output.add(self.outputBias)
         output.map(Sigmoid)
 
-        return output
+        return output.toArray()
+
+    def Train(self, inputs, targets, debug = False):
+        outputs = self.FeedForward(inputs)
+
+        outputs = Matrix.fromArray(outputs)
+        outputs.label = "Outputs"
+        targets = Matrix.fromArray(targets)
+        targets.label = "Targets"
+
+        err = targets - outputs
+        err.label = "Error"
+
+        transposed_hiddenOutputs = Matrix.transpose(self.hiddenOutputWeights)
+        hidden_errors = Matrix.matrix_multiplication(transposed_hiddenOutputs, err)
+        
+        #debug
+        if debug == True:
+            outputs.Debug()
+            targets.Debug()
+            err.Debug()
