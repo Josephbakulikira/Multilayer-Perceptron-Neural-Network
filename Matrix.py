@@ -35,7 +35,7 @@ class Matrix:
         result = Matrix(m.cols, m.rows)
         for x in range(m.rows):
             for y in range(m.cols):
-                result.matrix[y][x] = self.matrix[x][y]
+                result.matrix[y][x] = m.matrix[x][y]
         return result
 
     def add(self, value):
@@ -88,6 +88,13 @@ class Matrix:
             for y in range(self.cols):
                 self.matrix[x][y] = fn(self.matrix[x][y])
 
+    def staticMap(matrix, fn):
+        result = Matrix(matrix.rows, matrix.cols)
+        for x in range(matrix.rows):
+            for y in range(matrix.cols):
+                result.matrix[x][y] = fn(matrix.matrix[x][y])
+
+        return result
     def Debug(self):
         if self.rows == 1:
             if self.label != "":
