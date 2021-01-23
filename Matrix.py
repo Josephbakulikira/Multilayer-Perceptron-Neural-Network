@@ -31,6 +31,7 @@ class Matrix:
                 for y in range(self.cols):
                     self.matrix[x][y] *= value
 
+
     def transpose(m):
         result = Matrix(m.cols, m.rows)
         for x in range(m.rows):
@@ -95,11 +96,12 @@ class Matrix:
                 result.matrix[x][y] = fn(matrix.matrix[x][y])
 
         return result
+
     def Debug(self):
         if self.rows == 1:
             if self.label != "":
                 print("{0} : {1}".format(self.label, self.toArray()))
-                print(self.label + " : " + self.toArray())
+                # print(self.label + " : " + self.toArray())
             else:
                 print(self.toArray())
         else:

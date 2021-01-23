@@ -41,6 +41,7 @@ class NeuralNetwork:
         output.add(self.outputBias)
         output.map(Sigmoid)
 
+        
         return output.toArray()
 
     def Train(self, inputs, targets, debug = False):
@@ -65,7 +66,10 @@ class NeuralNetwork:
         err.label = "Error"
 
         gradient = Matrix.staticMap(outputs, dSigmoid)
-        gradient.HadamartProduct(err)
+        if err.rows == 1 and err.cols == 1:
+            gradient.multiply(err.matrix[0][0])
+        else:
+            gradient.HadamartProduct(err)
         gradient.multiply(self.learning_rate)
 
         hidden_transposed = Matrix.transpose(hidden)
@@ -77,7 +81,12 @@ class NeuralNetwork:
         self.outputBias.add(gradient)
 
         transposed_hiddenOutputs = Matrix.transpose(self.hiddenOutputWeights)
-        hidden_errors = Matrix.matrix_multiplication(transposed_hiddenOutputs, err)
+        hidden_errors = None
+        if err.rows == 1 and err.cols == 1:
+            hidden_errors = transposed_hiddenOutputs
+            hidden_errors.multiply(err.matrix[0][0])
+        else:
+            hidden_errors = Matrix.matrix_multiplication(transposed_hiddenOutputs, err)
 
         hidden_gradient = Matrix.staticMap(hidden, dSigmoid)
         hidden_gradient.HadamartProduct(hidden_errors)
