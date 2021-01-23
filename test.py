@@ -2,6 +2,7 @@ from Matrix import *
 from Network import *
 import random
 
+# example data
 training_data = [
     {
     "inputs": [0, 1],
@@ -20,18 +21,22 @@ training_data = [
     "targets": [0]
     },
 ]
-n = NeuralNetwork(2, 2, 1)
 
+# initialize a NeuralNetwork with NeuralNetwork(number of inputs, number of hidden layers nodes, number of outputs node)
+neuron = NeuralNetwork(2, 2, 1)
+
+# train the NeuralNetwork with the Example data above
 for i in range(50000):
     data = training_data[random.randint(0, len(training_data) - 1)]
-    n.Train(data["inputs"], data["targets"])
+    neuron.Train(data["inputs"], data["targets"])
 
 
-guess = n.FeedForward([0, 0])
+# try the Neural Network
+guess = neuron.FeedForward([0, 0])
 print(guess)
-guess = n.FeedForward([0, 1])
+guess = neuron.FeedForward([0, 1])
 print(guess)
-guess = n.FeedForward([1, 1])
+guess = neuron.FeedForward([1, 1])
 print(guess)
-guess = n.FeedForward([1, 0])
+guess = neuron.FeedForward([1, 0])
 print(guess)
