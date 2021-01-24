@@ -6,7 +6,7 @@
 ### check out test.py to see how it works
 
 # Projects with this library
-##-------------------------------
+# -------------------------------
 ## 1 . XOR problem with neural network
 ![2021-01-24 (2)](https://user-images.githubusercontent.com/48150537/105617993-d454ab00-5e08-11eb-9934-a62da9ad07de.png)
 
